@@ -10,10 +10,14 @@
 export class CreateUserInput {
     first_name: string;
     last_name: string;
+    is_active?: boolean;
 }
 
 export class UpdateUserInput {
-    id: number;
+    id?: number;
+    first_name: string;
+    last_name: string;
+    is_active?: boolean;
 }
 
 export class User {
@@ -32,7 +36,9 @@ export abstract class IQuery {
 export abstract class IMutation {
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
-    abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
+    abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
 
     abstract removeUser(id: number): User | Promise<User>;
 }
+
+export type UpdateResult = any;

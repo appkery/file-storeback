@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, DeleteResult, UpdateResult } from 'typeorm';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from '../graphql';
@@ -9,10 +9,10 @@ import { User } from '../graphql';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
+    private usersRepository: Repository<User>,
   ) {}
 
-  create(createUserInput: CreateUserInput) {
+  create(createUserInput: CreateUserInput): Promise<User> {
     return this.usersRepository.save(createUserInput);
   }
 
@@ -24,11 +24,11 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  update(id: number, updateUserInput: UpdateUserInput): Promise<UpdateResult> {
+    return this.usersRepository.update(id, updateUserInput);
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  remove(id: number): Promise<DeleteResult> {
+    return this.usersRepository.delete(id);
   }
 }
