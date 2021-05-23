@@ -1,21 +1,22 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
+// import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
+// import { User } from './users/entities/user.entity';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
-      definitions: {
-        path: join(process.cwd(), 'src/graphql.ts'),
-        outputAs: 'class'
-      },
+      // definitions: {
+      //   path: join(process.cwd(), 'src/graphql.ts'),
+      //   outputAs: 'class'
+      // },
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -29,8 +30,10 @@ import { User } from './users/entities/user.entity';
       // ],
       autoLoadEntities: true,
       synchronize: true,
+      keepConnectionAlive: true
     }),
-    UsersModule
+    UsersModule,
+    RolesModule
   ],
   // controllers: [AppController],
   // providers: [AppService],
