@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import GraphQLJSON from "graphql-type-json";
 // import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
@@ -7,12 +8,12 @@ import { UsersModule } from './users/users.module';
 // import { User } from './users/entities/user.entity';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
-import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
+      resolvers: { JSON: GraphQLJSON }
       // definitions: {
       //   path: join(process.cwd(), 'src/graphql.ts'),
       //   outputAs: 'class'
@@ -32,8 +33,7 @@ import { RolesModule } from './roles/roles.module';
       synchronize: true,
       keepConnectionAlive: true
     }),
-    UsersModule,
-    RolesModule
+    UsersModule
   ],
   // controllers: [AppController],
   // providers: [AppService],

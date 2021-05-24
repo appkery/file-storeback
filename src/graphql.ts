@@ -14,7 +14,7 @@ export class CreateUserInput {
 }
 
 export class UpdateUserInput {
-    id?: number;
+    id: number;
     first_name: string;
     last_name: string;
     is_active?: boolean;
@@ -25,6 +25,17 @@ export class User {
     first_name: string;
     last_name: string;
     is_active?: boolean;
+}
+
+export class UpdateResult {
+    raw?: JSON;
+    affected?: number;
+    generatedMaps?: JSON;
+}
+
+export class DeleteResult {
+    raw?: JSON;
+    affected?: number;
 }
 
 export abstract class IQuery {
@@ -38,7 +49,7 @@ export abstract class IMutation {
 
     abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
 
-    abstract removeUser(id: number): User | Promise<User>;
+    abstract removeUser(id: number): DeleteResult | Promise<DeleteResult>;
 }
 
-export type UpdateResult = any;
+export type JSON = any;
