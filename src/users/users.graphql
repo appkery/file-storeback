@@ -19,6 +19,17 @@ type DeleteResult {
   affected: Int
 }
 
+type UpdateResult {
+  raw: JSON
+  affected: Int
+  generatedMaps: JSON
+}
+
+type DeleteResult {
+  raw: JSON
+  affected: Int
+}
+
 input CreateUserInput {
   first_name: String!
   last_name: String!
@@ -26,7 +37,7 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  id: Int
+  id: Int!
   first_name: String!
   last_name: String!
   is_active: Boolean

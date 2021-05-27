@@ -34,8 +34,7 @@ import GraphQLJSON from 'graphql-type-json';
       synchronize: true,
       keepConnectionAlive: true
     }),
-    UsersModule,
-    RolesModule
+    UsersModule
   ],
   // controllers: [AppController],
   // providers: [AppService],
