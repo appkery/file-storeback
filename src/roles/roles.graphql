@@ -1,0 +1,35 @@
+type Role {
+  id: Int!
+  role: String!  
+}
+
+type UpdateResult {
+  raw: Json
+  affected: Int
+  generatedMaps: Json
+}
+
+type DeleteResult {
+  raw: Json
+  affected: Int
+}
+
+input CreateRoleInput {
+  role: String!
+}
+
+input UpdateRoleInput {
+  id: Int!
+  role: String!
+}
+
+type Query {
+  roles: [Role]!
+  role(id: Int!): Role
+}
+
+type Mutation {
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): UpdateResult!
+  removeRole(id: Int!): DeleteResult!
+}
