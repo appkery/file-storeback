@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DeleteResult, UpdateResult } from 'typeorm';
 import { CreateRoleInput } from './dto/create-role.input';
 import { UpdateRoleInput } from './dto/update-role.input';
+import { Role } from 'src/graphql';
 
 @Injectable()
 export class RolesService {
-  create(createRoleInput: CreateRoleInput) {
-    return 'This action adds a new role';
+  constructor(
+    @InjectRepository(Role)
+    private rolesRepository: Repository<Role>,
+  ) {}
+
+  async create(createRoleInput: CreateRoleInput): Promise<Role> {
+    return this.rolesRepository.save(createRoleInput);
   }
 
-  findAll() {
-    return `This action returns all roles`;
+  async findAll(): Promise<Role[]> {
+    return this.rolesRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
+  async findOne(id: number): Promise<Role> {
+    return this.rolesRepository.findOne(id);
   }
 
-  update(id: number, updateRoleInput: UpdateRoleInput) {
-    return `This action updates a #${id} role`;
+  async update(id: number, updateRoleInput: UpdateRoleInput): Promise<UpdateResult> {
+    return this.rolesRepository.update(id, updateRoleInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async remove(id: number): Promise<DeleteResult> {
+    return this.rolesRepository.delete(id);
   }
 }
