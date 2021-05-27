@@ -20,6 +20,7 @@ export class CreateUserInput {
     first_name: string;
     last_name: string;
     is_active?: boolean;
+    roles?: Role[];
 }
 
 export class UpdateUserInput {
@@ -42,17 +43,6 @@ export class UpdateResult {
 
 export class DeleteResult {
     raw?: Json;
-    affected?: number;
-}
-
-export class UpdateResult {
-    raw?: JSON;
-    affected?: number;
-    generatedMaps?: JSON;
-}
-
-export class DeleteResult {
-    raw?: JSON;
     affected?: number;
 }
 

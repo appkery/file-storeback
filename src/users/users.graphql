@@ -8,6 +8,20 @@ type User {
   roles: [Role]
 }
 
+input CreateUserInput {
+  first_name: String!
+  last_name: String!
+  is_active: Boolean
+  roles: [Role]
+}
+
+input UpdateUserInput {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  is_active: Boolean
+}
+
 type UpdateResult {
   raw: Json
   affected: Int
@@ -17,30 +31,6 @@ type UpdateResult {
 type DeleteResult {
   raw: Json
   affected: Int
-}
-
-type UpdateResult {
-  raw: JSON
-  affected: Int
-  generatedMaps: JSON
-}
-
-type DeleteResult {
-  raw: JSON
-  affected: Int
-}
-
-input CreateUserInput {
-  first_name: String!
-  last_name: String!
-  is_active: Boolean
-}
-
-input UpdateUserInput {
-  id: Int!
-  first_name: String!
-  last_name: String!
-  is_active: Boolean
 }
 
 type Query {

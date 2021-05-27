@@ -1,6 +1,17 @@
+scalar Json
+
 type Role {
   id: Int!
   role: String!  
+}
+
+input CreateRoleInput {
+  role: String!
+}
+
+input UpdateRoleInput {
+  id: Int!
+  role: String!
 }
 
 type UpdateResult {
@@ -12,15 +23,6 @@ type UpdateResult {
 type DeleteResult {
   raw: Json
   affected: Int
-}
-
-input CreateRoleInput {
-  role: String!
-}
-
-input UpdateRoleInput {
-  id: Int!
-  role: String!
 }
 
 type Query {
