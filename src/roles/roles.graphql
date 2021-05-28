@@ -3,15 +3,18 @@ scalar Json
 type Role {
   id: Int!
   role: String!  
+  users: [User]
 }
 
 input CreateRoleInput {
   role: String!
+  users: [User]
 }
 
 input UpdateRoleInput {
   id: Int!
   role: String!
+  users: [User]
 }
 
 type UpdateResult {

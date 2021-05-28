@@ -9,11 +9,13 @@
 /* eslint-disable */
 export class CreateRoleInput {
     role: string;
+    users?: User[];
 }
 
 export class UpdateRoleInput {
     id: number;
     role: string;
+    users?: User[];
 }
 
 export class CreateUserInput {
@@ -28,11 +30,13 @@ export class UpdateUserInput {
     first_name: string;
     last_name: string;
     is_active?: boolean;
+    roles?: Role[];
 }
 
 export class Role {
     id: number;
     role: string;
+    users?: User[];
 }
 
 export class UpdateResult {

@@ -20,6 +20,7 @@ input UpdateUserInput {
   first_name: String!
   last_name: String!
   is_active: Boolean
+  roles: [Role]
 }
 
 type UpdateResult {
