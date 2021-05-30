@@ -1,5 +1,3 @@
-scalar Json
-
 type User {
   id: Int!
   first_name: String!
@@ -21,17 +19,6 @@ input UpdateUserInput {
   last_name: String!
   is_active: Boolean
   roles: [UpdateRoleInput]
-}
-
-type UpdateResult {
-  raw: Json
-  affected: Int
-  generatedMaps: Json
-}
-
-type DeleteResult {
-  raw: Json
-  affected: Int
 }
 
 type Query {

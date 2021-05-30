@@ -1,0 +1,12 @@
+scalar Json
+
+type UpdateResult {
+  raw: Json
+  affected: Int
+  generatedMaps: Json
+}
+
+type DeleteResult {
+  raw: Json
+  affected: Int
+}
