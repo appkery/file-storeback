@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DeleteResult, UpdateResult } from 'typeorm';
-import { CreateRoleInput } from './dto/create-role.input';
-import { UpdateRoleInput } from './dto/update-role.input';
+import { CreateRoleInput } from 'src/graphql';
+import { UpdateRoleInput } from 'src/graphql';
 import { Role } from 'src/graphql';
 
 @Injectable()
