@@ -1,4 +1,4 @@
-import { Role } from "src/roles/entities/role.entity";
+import { Role } from "../../graphql";
 
 export class CreateUserInput {
   first_name: string;

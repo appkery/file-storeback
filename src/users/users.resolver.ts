@@ -12,6 +12,11 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
+  @Mutation('updateUser')
+  update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.usersService.update(updateUserInput);
+  }
+
   @Query('users')
   findAll() {
     return this.usersService.findAll();
@@ -20,11 +25,6 @@ export class UsersResolver {
   @Query('user')
   findOne(@Args('id') id: number) {
     return this.usersService.findOne(id);
-  }
-
-  @Mutation('updateUser')
-  update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation('removeUser')

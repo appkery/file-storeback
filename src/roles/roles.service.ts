@@ -13,22 +13,22 @@ export class RolesService {
   ) {}
 
   async create(createRoleInput: CreateRoleInput): Promise<Role> {
-    return this.rolesRepository.save(createRoleInput);
+    return await this.rolesRepository.save(createRoleInput);
   }
 
   async findAll(): Promise<Role[]> {
-    return this.rolesRepository.find();
+    return await this.rolesRepository.find();
   }
 
   async findOne(id: number): Promise<Role> {
-    return this.rolesRepository.findOne(id);
+    return await this.rolesRepository.findOne(id);
   }
 
   async update(id: number, updateRoleInput: UpdateRoleInput): Promise<UpdateResult> {
-    return this.rolesRepository.update(id, updateRoleInput);
+    return await this.rolesRepository.update(id, updateRoleInput);
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    return this.rolesRepository.delete(id);
+    return await this.rolesRepository.delete(id);
   }
 }

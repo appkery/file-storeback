@@ -1,21 +1,19 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
+  PrimaryGeneratedColumn
 } from 'typeorm';
-import { User } from '../../users/entities/user.entity';
+import { UserRole } from '../../graphql';
 
 @Entity()
 export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  role: string;
-
-  @ManyToMany((type) => User, (user) => user.roles)
-  @JoinTable()
-  users: User[];
+  @Column({
+    type: "enum",
+    enum: UserRole,
+    default: UserRole.CUSTOMER
+  })
+  role: UserRole;
 }

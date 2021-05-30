@@ -1,7 +1,5 @@
-import { User } from '../../users/entities/user.entity';
+import { UserRole } from '../../graphql';
 
 export class CreateRoleInput {
-  id: number;
-  role: string;
-  users: User[];
+  role: UserRole;
 }

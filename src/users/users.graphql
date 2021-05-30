@@ -12,7 +12,7 @@ input CreateUserInput {
   first_name: String!
   last_name: String!
   is_active: Boolean
-  roles: [Role]
+  roles: [CreateRoleInput]
 }
 
 input UpdateUserInput {
@@ -20,7 +20,7 @@ input UpdateUserInput {
   first_name: String!
   last_name: String!
   is_active: Boolean
-  roles: [Role]
+  roles: [UpdateRoleInput]
 }
 
 type UpdateResult {
@@ -41,6 +41,6 @@ type Query {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): UpdateResult!
+  updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): DeleteResult!
 }

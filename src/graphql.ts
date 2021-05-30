@@ -7,22 +7,25 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum UserRole {
+    ADMIN = "ADMIN",
+    CUSTOMER = "CUSTOMER"
+}
+
 export class CreateRoleInput {
-    role: string;
-    users?: User[];
+    role: UserRole;
 }
 
 export class UpdateRoleInput {
     id: number;
-    role: string;
-    users?: User[];
+    role: UserRole;
 }
 
 export class CreateUserInput {
     first_name: string;
     last_name: string;
     is_active?: boolean;
-    roles?: Role[];
+    roles?: CreateRoleInput[];
 }
 
 export class UpdateUserInput {
@@ -30,24 +33,12 @@ export class UpdateUserInput {
     first_name: string;
     last_name: string;
     is_active?: boolean;
-    roles?: Role[];
+    roles?: UpdateRoleInput[];
 }
 
 export class Role {
     id: number;
-    role: string;
-    users?: User[];
-}
-
-export class UpdateResult {
-    raw?: Json;
-    affected?: number;
-    generatedMaps?: Json;
-}
-
-export class DeleteResult {
-    raw?: Json;
-    affected?: number;
+    role: UserRole;
 }
 
 export abstract class IQuery {
@@ -69,7 +60,7 @@ export abstract class IMutation {
 
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
-    abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
+    abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
 
     abstract removeUser(id: number): DeleteResult | Promise<DeleteResult>;
 }
@@ -80,6 +71,17 @@ export class User {
     last_name: string;
     is_active?: boolean;
     roles?: Role[];
+}
+
+export class UpdateResult {
+    raw?: Json;
+    affected?: number;
+    generatedMaps?: Json;
+}
+
+export class DeleteResult {
+    raw?: Json;
+    affected?: number;
 }
 
 export type Json = any;

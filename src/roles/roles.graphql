@@ -1,31 +1,20 @@
-scalar Json
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
 
 type Role {
   id: Int!
-  role: String!  
-  users: [User]
+  role: UserRole!  
 }
 
 input CreateRoleInput {
-  role: String!
-  users: [User]
+  role: UserRole!
 }
 
 input UpdateRoleInput {
   id: Int!
-  role: String!
-  users: [User]
-}
-
-type UpdateResult {
-  raw: Json
-  affected: Int
-  generatedMaps: Json
-}
-
-type DeleteResult {
-  raw: Json
-  affected: Int
+  role: UserRole!
 }
 
 type Query {
