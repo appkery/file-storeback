@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { RolesModule } from './roles/roles.module';
       keepConnectionAlive: true
     }),
     UsersModule,
-    RolesModule
+    RolesModule,
+    OrdersModule
   ]
 })
 export class AppModule {

@@ -1,0 +1,29 @@
+enum UserOrder {
+  ADMIN
+  CUSTOMER
+}
+
+type Order {
+  id: Int!
+  order: UserOrder!  
+}
+
+input CreateOrderInput {
+  order: UserOrder!
+}
+
+input UpdateOrderInput {
+  id: Int!
+  order: UserOrder!
+}
+
+type Query {
+  orders: [Order]!
+  order(id: Int!): Order
+}
+
+type Mutation {
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): UpdateResult!
+  removeOrder(id: Int!): DeleteResult!
+}
