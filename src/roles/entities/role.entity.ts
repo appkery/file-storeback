@@ -3,7 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { UserRole } from '../../graphql';
+import { UserRole } from 'src/graphql';
 
 @Entity()
 export class Role {

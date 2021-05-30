@@ -5,7 +5,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Role } from '../../roles/entities/role.entity';
+import { Role } from 'src/roles/entities/role.entity';
 
 @Entity()
 export class User {
