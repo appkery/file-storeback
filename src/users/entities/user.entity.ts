@@ -13,6 +13,12 @@ export class User {
   id: number;
 
   @Column()
+  username: string;
+
+  @Column()
+  password: string;
+
+  @Column()
   first_name: string;
 
   @Column()

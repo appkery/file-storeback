@@ -36,6 +36,8 @@ export class UpdateRoleInput {
 }
 
 export class CreateUserInput {
+    username: string;
+    password: string;
     first_name: string;
     last_name: string;
     is_active?: boolean;
@@ -44,6 +46,8 @@ export class CreateUserInput {
 
 export class UpdateUserInput {
     id: number;
+    username: string;
+    password: string;
     first_name: string;
     last_name: string;
     is_active?: boolean;
@@ -107,6 +111,8 @@ export class Role {
 
 export class User {
     id: number;
+    username: string;
+    password: string;
     first_name: string;
     last_name: string;
     is_active?: boolean;

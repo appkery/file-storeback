@@ -27,6 +27,11 @@ export class UsersResolver {
     return this.usersService.findOne(id);
   }
 
+  @Query('user')
+  findUser(@Args('username') username: string) {
+    return this.usersService.findUser(username);
+  }
+
   @Mutation('removeUser')
   remove(@Args('id') id: number) {
     return this.usersService.remove(id);

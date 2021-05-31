@@ -1,5 +1,7 @@
 type User {
   id: Int!
+  username: String!
+  password: String!
   first_name: String!
   last_name: String!
   is_active: Boolean
@@ -7,6 +9,8 @@ type User {
 }
 
 input CreateUserInput {
+  username: String!
+  password: String!
   first_name: String!
   last_name: String!
   is_active: Boolean
@@ -15,6 +19,8 @@ input CreateUserInput {
 
 input UpdateUserInput {
   id: Int!
+  username: String!
+  password: String!
   first_name: String!
   last_name: String!
   is_active: Boolean
