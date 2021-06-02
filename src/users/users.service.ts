@@ -32,6 +32,10 @@ export class UsersService {
     return await this.usersRepository.findOneOrFail({ username: username });
   }
 
+  async whoAmI(id: number): Promise<User> {
+    return await this.usersRepository.findOne(id);
+  }
+
   async remove(id: number): Promise<DeleteResult> {
     return await this.usersRepository.delete(id);
   }
