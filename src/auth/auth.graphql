@@ -1,0 +1,8 @@
+input Auth {
+  username: String
+  password: String
+}
+
+type Query {
+  login(auth: Auth): Json
+}

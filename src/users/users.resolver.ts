@@ -15,31 +15,20 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
-  @Mutation('updateUser')
-  update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput);
-  }
-
   @Query('users')
-  @UseGuards(GqlAuthGuard)
   findAll() {
     return this.usersService.findAll();
   }
 
   @Query('user')
-  findOne(@Args('id') id: number) {
-    return this.usersService.findOne(id);
-  }
-
-  @Query('user')
-  findUser(@Args('username') username: string) {
-    return this.usersService.findUser(username);
-  }
-
-  @Query('user')
   @UseGuards(GqlAuthGuard)
-  whoAmI(@CurrentUser() user: User) {
+  findOne(@CurrentUser() user: User) {
     return this.usersService.findOne(user.id);
+  }
+
+  @Mutation('updateUser')
+  update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    return this.usersService.update(updateUserInput);
   }
 
   @Mutation('removeUser')

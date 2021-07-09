@@ -12,10 +12,6 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
-      resolvers: { Json: GraphQLJSON }
-    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -25,15 +21,19 @@ import { AppService } from './app.service';
       database: 'file_storeback',
       autoLoadEntities: true,
       synchronize: true,
-      keepConnectionAlive: true
+      keepConnectionAlive: true,
+    }),
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      resolvers: { Json: GraphQLJSON },
     }),
     UsersModule,
+    AuthModule,
     RolesModule,
     OrdersModule,
-    AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService]
+  // providers: [AppService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}

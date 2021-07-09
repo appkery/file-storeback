@@ -17,6 +17,11 @@ export enum UserRole {
     CUSTOMER = "CUSTOMER"
 }
 
+export class Auth {
+    username?: string;
+    password?: string;
+}
+
 export class CreateOrderInput {
     order: UserOrder;
 }
@@ -45,13 +50,29 @@ export class CreateUserInput {
 }
 
 export class UpdateUserInput {
-    id: number;
-    username: string;
-    password: string;
-    first_name: string;
-    last_name: string;
+    id?: number;
+    username?: string;
+    password?: string;
+    first_name?: string;
+    last_name?: string;
     is_active?: boolean;
     roles?: UpdateRoleInput[];
+}
+
+export abstract class IQuery {
+    abstract login(auth?: Auth): Json | Promise<Json>;
+
+    abstract orders(): Order[] | Promise<Order[]>;
+
+    abstract order(id: number): Order | Promise<Order>;
+
+    abstract roles(): Role[] | Promise<Role[]>;
+
+    abstract role(id: number): Role | Promise<Role>;
+
+    abstract users(): User[] | Promise<User[]>;
+
+    abstract user(user?: UpdateUserInput): User | Promise<User>;
 }
 
 export class UpdateResult {
@@ -68,20 +89,6 @@ export class DeleteResult {
 export class Order {
     id: number;
     order: UserOrder;
-}
-
-export abstract class IQuery {
-    abstract orders(): Order[] | Promise<Order[]>;
-
-    abstract order(id: number): Order | Promise<Order>;
-
-    abstract roles(): Role[] | Promise<Role[]>;
-
-    abstract role(id: number): Role | Promise<Role>;
-
-    abstract users(): User[] | Promise<User[]>;
-
-    abstract user(id: number): User | Promise<User>;
 }
 
 export abstract class IMutation {
@@ -110,11 +117,11 @@ export class Role {
 }
 
 export class User {
-    id: number;
-    username: string;
-    password: string;
-    first_name: string;
-    last_name: string;
+    id?: number;
+    username?: string;
+    password?: string;
+    first_name?: string;
+    last_name?: string;
     is_active?: boolean;
     roles?: Role[];
 }

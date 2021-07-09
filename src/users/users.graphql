@@ -1,9 +1,9 @@
 type User {
-  id: Int!
-  username: String!
-  password: String!
-  first_name: String!
-  last_name: String!
+  id: Int
+  username: String
+  password: String
+  first_name: String
+  last_name: String
   is_active: Boolean
   roles: [Role]
 }
@@ -18,22 +18,22 @@ input CreateUserInput {
 }
 
 input UpdateUserInput {
-  id: Int!
-  username: String!
-  password: String!
-  first_name: String!
-  last_name: String!
+  id: Int
+  username: String
+  password: String
+  first_name: String
+  last_name: String
   is_active: Boolean
   roles: [UpdateRoleInput]
 }
 
 type Query {
   users: [User]!
-  user(id: Int!): User
+  user(user: UpdateUserInput): User
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): UpdateResult!
   removeUser(id: Int!): DeleteResult!
 }

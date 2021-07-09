@@ -16,10 +16,6 @@ export class UsersService {
     return await this.usersRepository.save(createUserInput);
   }
 
-  async update(updateUserInput: UpdateUserInput): Promise<User> {
-    return await this.usersRepository.save(updateUserInput);
-  }
-
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
   }
@@ -29,11 +25,11 @@ export class UsersService {
   }
 
   async findUser(username: string): Promise<User> {
-    return await this.usersRepository.findOneOrFail({ username: username });
+    return await this.usersRepository.findOne({ username: username });
   }
 
-  async whoAmI(id: number): Promise<User> {
-    return await this.usersRepository.findOne(id);
+  async update(updateUserInput: UpdateUserInput): Promise<User> {
+    return await this.usersRepository.save(updateUserInput);
   }
 
   async remove(id: number): Promise<DeleteResult> {
