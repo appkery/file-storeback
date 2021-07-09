@@ -1,8 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { UserOrder } from 'src/graphql';
 
 @Entity()
@@ -11,9 +7,9 @@ export class Order {
   id: number;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: UserOrder,
-    default: UserOrder.CUSTOMER
+    default: UserOrder.CUSTOMER,
   })
   order: UserOrder;
 }

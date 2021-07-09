@@ -24,7 +24,10 @@ export class OrdersService {
     return await this.ordersRepository.findOne(id);
   }
 
-  async update(id: number, updateOrderInput: UpdateOrderInput): Promise<UpdateResult> {
+  async update(
+    id: number,
+    updateOrderInput: UpdateOrderInput,
+  ): Promise<UpdateResult> {
     return await this.ordersRepository.update(id, updateOrderInput);
   }
 

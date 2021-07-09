@@ -24,7 +24,10 @@ export class RolesService {
     return await this.rolesRepository.findOne(id);
   }
 
-  async update(id: number, updateRoleInput: UpdateRoleInput): Promise<UpdateResult> {
+  async update(
+    id: number,
+    updateRoleInput: UpdateRoleInput,
+  ): Promise<UpdateResult> {
     return await this.rolesRepository.update(id, updateRoleInput);
   }
 
