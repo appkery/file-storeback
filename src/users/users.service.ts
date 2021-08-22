@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DeleteResult, UpdateResult } from 'typeorm';
+import { Repository, DeleteResult } from 'typeorm';
 import { CreateUserInput } from 'src/graphql';
 import { UpdateUserInput } from 'src/graphql';
 import { User } from 'src/graphql';
@@ -12,14 +12,6 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async create(createUserInput: CreateUserInput): Promise<User> {
-    return await this.usersRepository.save(createUserInput);
-  }
-
-  async findAll(): Promise<User[]> {
-    return await this.usersRepository.find();
-  }
-
   async findOne(id: number): Promise<User> {
     return await this.usersRepository.findOne(id);
   }
@@ -28,11 +20,19 @@ export class UsersService {
     return await this.usersRepository.findOne({ username: username });
   }
 
-  async update(updateUserInput: UpdateUserInput): Promise<User> {
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
+  }
+
+  async create(createUserInput: CreateUserInput): Promise<User> {
+    return await this.usersRepository.save(createUserInput);
+  }
+
+  async update(updateUserInput: UpdateUserInput): Promise<unknown> {
     return await this.usersRepository.save(updateUserInput);
   }
 
-  async remove(id: number): Promise<DeleteResult> {
+  async delete(id: number): Promise<DeleteResult> {
     return await this.usersRepository.delete(id);
   }
 }

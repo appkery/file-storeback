@@ -19,18 +19,15 @@ export class User {
   password: string;
 
   @Column()
-  first_name: string;
-
-  @Column()
-  last_name: string;
+  full_name: string;
 
   @Column({ default: true })
   is_active: boolean;
 
-  @ManyToMany((type) => Role, {
-    cascade: true,
-    eager: true,
-  })
-  @JoinTable()
-  roles: Role[];
+  // @ManyToMany((type) => Role, {
+  //   cascade: true,
+  //   eager: true,
+  // })
+  // @JoinTable()
+  // roles: Role[];
 }

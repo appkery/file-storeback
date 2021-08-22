@@ -10,3 +10,7 @@ type DeleteResult {
   raw: Json
   affected: Int
 }
+
+type LoginResult {
+  access_token: Json
+}

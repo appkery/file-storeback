@@ -32,7 +32,7 @@ import { AppService } from './app.service';
     RolesModule,
     OrdersModule,
   ],
-  controllers: [AppController],
+  // controllers: [AppController],
   // providers: [AppService],
 })
 export class AppModule {

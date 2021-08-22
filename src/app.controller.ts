@@ -8,8 +8,8 @@ import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 @Controller()
 export class AppController {
   constructor(
-    private readonly appService: AppService,
-    private authService: AuthService,
+    // private readonly appService: AppService,
+    private readonly authService: AuthService,
   ) {}
 
   // @Get()

@@ -17,9 +17,9 @@ export enum UserRole {
     CUSTOMER = "CUSTOMER"
 }
 
-export class Auth {
-    username?: string;
-    password?: string;
+export class GetAuthInput {
+    username: string;
+    password: string;
 }
 
 export class CreateOrderInput {
@@ -40,27 +40,27 @@ export class UpdateRoleInput {
     role: UserRole;
 }
 
+export class GetUserInput {
+    id: number;
+}
+
 export class CreateUserInput {
     username: string;
     password: string;
-    first_name: string;
-    last_name: string;
+    full_name: string;
     is_active?: boolean;
-    roles?: CreateRoleInput[];
 }
 
 export class UpdateUserInput {
-    id?: number;
+    id: number;
     username?: string;
     password?: string;
-    first_name?: string;
-    last_name?: string;
+    full_name?: string;
     is_active?: boolean;
-    roles?: UpdateRoleInput[];
 }
 
 export abstract class IQuery {
-    abstract login(auth?: Auth): Json | Promise<Json>;
+    abstract login(getAuthInput?: GetAuthInput): LoginResult | Promise<LoginResult>;
 
     abstract orders(): Order[] | Promise<Order[]>;
 
@@ -70,9 +70,9 @@ export abstract class IQuery {
 
     abstract role(id: number): Role | Promise<Role>;
 
-    abstract users(): User[] | Promise<User[]>;
+    abstract getUser(getUserInput: GetUserInput): User | Promise<User>;
 
-    abstract user(user?: UpdateUserInput): User | Promise<User>;
+    abstract getUsers(): User[] | Promise<User[]>;
 }
 
 export class UpdateResult {
@@ -84,6 +84,10 @@ export class UpdateResult {
 export class DeleteResult {
     raw?: Json;
     affected?: number;
+}
+
+export class LoginResult {
+    access_token?: Json;
 }
 
 export class Order {
@@ -106,9 +110,9 @@ export abstract class IMutation {
 
     abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
 
-    abstract updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
+    abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
 
-    abstract removeUser(id: number): DeleteResult | Promise<DeleteResult>;
+    abstract deleteUser(id: number): DeleteResult | Promise<DeleteResult>;
 }
 
 export class Role {
@@ -117,13 +121,11 @@ export class Role {
 }
 
 export class User {
-    id?: number;
-    username?: string;
-    password?: string;
-    first_name?: string;
-    last_name?: string;
+    id: number;
+    username: string;
+    password: string;
+    full_name: string;
     is_active?: boolean;
-    roles?: Role[];
 }
 
 export type Json = any;

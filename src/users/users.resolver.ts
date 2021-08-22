@@ -1,7 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UsersService } from './users.service';
-import { CreateUserInput, User } from 'src/graphql';
-import { UpdateUserInput } from 'src/graphql';
+import { GetUserInput, CreateUserInput, UpdateUserInput } from 'src/graphql';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
 import { CurrentUser } from './currentUser.decorator';
@@ -10,20 +9,20 @@ import { CurrentUser } from './currentUser.decorator';
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation('createUser')
-  create(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.usersService.create(createUserInput);
+  @Query('getUser')
+  // @UseGuards(GqlAuthGuard)
+  findOne(/* @CurrentUser('getUserInput') */@Args('getUserInput') getUserInput: GetUserInput) {
+    return this.usersService.findOne(getUserInput.id);
   }
-
-  @Query('users')
+ 
+  @Query('getUsers')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Query('user')
-  @UseGuards(GqlAuthGuard)
-  findOne(@CurrentUser() user: User) {
-    return this.usersService.findOne(user.id);
+  @Mutation('createUser')
+  create(@Args('createUserInput') createUserInput: CreateUserInput) {
+    return this.usersService.create(createUserInput);
   }
 
   @Mutation('updateUser')
@@ -31,8 +30,8 @@ export class UsersResolver {
     return this.usersService.update(updateUserInput);
   }
 
-  @Mutation('removeUser')
-  remove(@Args('id') id: number) {
-    return this.usersService.remove(id);
+  @Mutation('deleteUser')
+  delete(@Args('id') id: number) {
+    return this.usersService.delete(id);
   }
 }
