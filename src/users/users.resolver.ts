@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { GetUserInput, CreateUserInput, UpdateUserInput } from 'src/graphql';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from 'src/auth/guards/gql-auth.guard';
+import { GqlJwtGuard } from 'src/auth/guards/gql-jwt.guard';
 import { CurrentUser } from './currentUser.decorator';
 
 @Resolver('User')
@@ -10,7 +10,7 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Query('getUser')
-  // @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlJwtGuard)
   findOne(/* @CurrentUser('getUserInput') */@Args('getUserInput') getUserInput: GetUserInput) {
     return this.usersService.findOne(getUserInput.id);
   }

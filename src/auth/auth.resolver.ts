@@ -3,6 +3,7 @@ import { Args, Query } from '@nestjs/graphql';
 import { Resolver } from '@nestjs/graphql';
 import { GetAuthInput } from 'src/graphql';
 import { AuthService } from './auth.service';
+import { GqlLocalGuard } from './guards/gql-local.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
@@ -10,8 +11,8 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
   @Query('login')
+  @UseGuards(GqlLocalGuard)
   login(@Args('getAuthInput') getAuthInput: GetAuthInput) {
     return this.authService.login(getAuthInput);
   }
