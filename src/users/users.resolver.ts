@@ -9,9 +9,8 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Query('getUser')
-  // @UseGuards(GqlJwtGuard)
-  findOne(/* @CurrentUser('getUserInput') */@Args('getUserInput') getUserInput: GetUserInput) {
-    return this.usersService.findOne(getUserInput.id);
+  findOne(@CurrentUser('user') getUserInput: GetUserInput) {
+    return this.usersService.findUser(getUserInput.username);
   }
  
   @Query('getUsers')

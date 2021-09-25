@@ -8,7 +8,7 @@ type User {
 }
 
 input GetUserInput {
-  id: Int!
+  username: String!
 }
 
 type Query {

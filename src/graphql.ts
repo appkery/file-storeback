@@ -18,8 +18,8 @@ export enum UserRole {
 }
 
 export class GetAuthInput {
+    id: number;
     username: string;
-    password: string;
 }
 
 export class CreateOrderInput {
@@ -41,7 +41,7 @@ export class UpdateRoleInput {
 }
 
 export class GetUserInput {
-    id: number;
+    username: string;
 }
 
 export class CreateUserInput {
@@ -59,20 +59,26 @@ export class UpdateUserInput {
     is_active?: boolean;
 }
 
-export abstract class IQuery {
+export abstract class IMutation {
     abstract login(getAuthInput?: GetAuthInput): LoginResult | Promise<LoginResult>;
 
-    abstract orders(): Order[] | Promise<Order[]>;
+    abstract createOrder(createOrderInput: CreateOrderInput): Order | Promise<Order>;
 
-    abstract order(id: number): Order | Promise<Order>;
+    abstract updateOrder(updateOrderInput: UpdateOrderInput): UpdateResult | Promise<UpdateResult>;
 
-    abstract roles(): Role[] | Promise<Role[]>;
+    abstract removeOrder(id: number): DeleteResult | Promise<DeleteResult>;
 
-    abstract role(id: number): Role | Promise<Role>;
+    abstract createRole(createRoleInput: CreateRoleInput): Role | Promise<Role>;
 
-    abstract getUser(getUserInput: GetUserInput): User | Promise<User>;
+    abstract updateRole(updateRoleInput: UpdateRoleInput): UpdateResult | Promise<UpdateResult>;
 
-    abstract getUsers(): User[] | Promise<User[]>;
+    abstract removeRole(id: number): DeleteResult | Promise<DeleteResult>;
+
+    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
+
+    abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
+
+    abstract deleteUser(id: number): DeleteResult | Promise<DeleteResult>;
 }
 
 export class UpdateResult {
@@ -95,24 +101,18 @@ export class Order {
     order: UserOrder;
 }
 
-export abstract class IMutation {
-    abstract createOrder(createOrderInput: CreateOrderInput): Order | Promise<Order>;
+export abstract class IQuery {
+    abstract orders(): Order[] | Promise<Order[]>;
 
-    abstract updateOrder(updateOrderInput: UpdateOrderInput): UpdateResult | Promise<UpdateResult>;
+    abstract order(id: number): Order | Promise<Order>;
 
-    abstract removeOrder(id: number): DeleteResult | Promise<DeleteResult>;
+    abstract roles(): Role[] | Promise<Role[]>;
 
-    abstract createRole(createRoleInput: CreateRoleInput): Role | Promise<Role>;
+    abstract role(id: number): Role | Promise<Role>;
 
-    abstract updateRole(updateRoleInput: UpdateRoleInput): UpdateResult | Promise<UpdateResult>;
+    abstract getUser(getUserInput: GetUserInput): User | Promise<User>;
 
-    abstract removeRole(id: number): DeleteResult | Promise<DeleteResult>;
-
-    abstract createUser(createUserInput: CreateUserInput): User | Promise<User>;
-
-    abstract updateUser(updateUserInput: UpdateUserInput): UpdateResult | Promise<UpdateResult>;
-
-    abstract deleteUser(id: number): DeleteResult | Promise<DeleteResult>;
+    abstract getUsers(): User[] | Promise<User[]>;
 }
 
 export class Role {

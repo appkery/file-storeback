@@ -1,8 +1,8 @@
 input GetAuthInput {
+  id: Int!
   username: String!
-  password: String!
 }
 
-type Query {
+type Mutation {
   login(getAuthInput: GetAuthInput): LoginResult
 }
