@@ -14,13 +14,13 @@ export class AuthService {
     const user = await this.usersService.findUser(username);
     if (user && user.password === password) {
       const { password, ...result } = user;
-      return user;
+      return result;
     }
     return null;
   }
 
-  async login(getAuthInput: GetAuthInput): Promise<LoginResult> {
-    const payload = { username: getAuthInput.username, sub: getAuthInput.id };
+  async login(user: any): Promise<LoginResult> {
+    const payload = { username: user.username, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };
