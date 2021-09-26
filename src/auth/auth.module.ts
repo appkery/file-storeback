@@ -18,6 +18,6 @@ import { AuthResolver } from './auth.resolver';
     }),
   ],
   providers: [AuthResolver, AuthService, LocalStrategy, JwtStrategy],
-  exports: [AuthService, JwtModule],
+  exports: [AuthService],
 })
 export class AuthModule {}
