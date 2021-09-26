@@ -18,8 +18,8 @@ export enum UserRole {
 }
 
 export class GetAuthInput {
-    id: number;
     username: string;
+    password: string;
 }
 
 export class CreateOrderInput {
