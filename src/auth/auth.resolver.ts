@@ -12,6 +12,7 @@ export class AuthResolver {
 
   @Mutation('login')
   @UseGuards(GqlLocalGuard)
+  login(@CurrentUser() getAuthInput: GetAuthInput) {
     return this.authService.login(getAuthInput);
   }
 }

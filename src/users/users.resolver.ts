@@ -11,6 +11,7 @@ export class UsersResolver {
 
   @Query('getUser')
   @UseGuards(GqlJwtGuard)
+  findOne(@CurrentUser() getUserInput: GetUserInput) {
     return this.usersService.findUser(getUserInput.username);
   }
  
