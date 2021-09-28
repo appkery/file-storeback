@@ -1,9 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Role } from 'src/roles/entities/role.entity';
 
 @Entity()
@@ -20,9 +15,9 @@ export class User {
   @Column()
   full_name: string;
 
+  @OneToMany((type) => Role, (role) => role.user)
+  roles: Role[];
+
   @Column({ default: true })
   is_active: boolean;
-
-  @OneToMany(type => Role, role => role.user)
-  roles: Role[];
 }

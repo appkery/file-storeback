@@ -14,7 +14,8 @@ export enum UserOrder {
 
 export enum UserRole {
     ADMIN = "ADMIN",
-    CUSTOMER = "CUSTOMER"
+    MEMBER = "MEMBER",
+    GUEST = "GUEST"
 }
 
 export class GetAuthInput {
@@ -48,6 +49,7 @@ export class CreateUserInput {
     username: string;
     password: string;
     full_name: string;
+    roles?: CreateRoleInput[];
     is_active?: boolean;
 }
 
@@ -56,6 +58,7 @@ export class UpdateUserInput {
     username?: string;
     password?: string;
     full_name?: string;
+    roles?: UpdateRoleInput[];
     is_active?: boolean;
 }
 
@@ -125,6 +128,7 @@ export class User {
     username: string;
     password: string;
     full_name: string;
+    roles?: Role[];
     is_active?: boolean;
 }
 

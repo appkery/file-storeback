@@ -1,6 +1,7 @@
 enum UserRole {
   ADMIN
-  CUSTOMER
+  MEMBER
+  GUEST
 }
 
 type Role {
