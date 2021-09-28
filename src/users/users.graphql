@@ -3,7 +3,7 @@ type User {
   username: String!
   password: String!
   full_name: String!
-  # roles: [Role]
+  roles: [Role]
   is_active: Boolean
 }
 
@@ -20,7 +20,7 @@ input CreateUserInput {
   username: String!
   password: String!
   full_name: String!
-  # roles: [CreateRoleInput]
+  roles: [CreateRoleInput]
   is_active: Boolean
 }
 
@@ -29,7 +29,7 @@ input UpdateUserInput {
   username: String
   password: String
   full_name: String
-  # roles: [UpdateRoleInput]
+  roles: [UpdateRoleInput]
   is_active: Boolean
 }
 

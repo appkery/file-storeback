@@ -2,8 +2,7 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToMany,
-  JoinTable,
+  OneToMany
 } from 'typeorm';
 import { Role } from 'src/roles/entities/role.entity';
 
@@ -24,10 +23,6 @@ export class User {
   @Column({ default: true })
   is_active: boolean;
 
-  // @ManyToMany((type) => Role, {
-  //   cascade: true,
-  //   eager: true,
-  // })
-  // @JoinTable()
-  // roles: Role[];
+  @OneToMany(type => Role, role => role.user)
+  roles: Role[];
 }

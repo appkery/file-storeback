@@ -1,9 +1,11 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  ManyToOne
 } from 'typeorm';
 import { UserRole } from 'src/graphql';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 export class Role {
@@ -16,4 +18,7 @@ export class Role {
     default: UserRole.CUSTOMER
   })
   role: UserRole;
+
+  @ManyToOne(type => User, user => user.roles)
+  user: User;
 }
