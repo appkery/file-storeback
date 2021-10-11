@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AssetsModule } from './assets/assets.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { AssetsModule } from './assets/assets.module';
     RolesModule,
     OrdersModule,
     AssetsModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   // providers: [AppService],
