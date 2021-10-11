@@ -9,6 +9,7 @@ import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { PaymentsModule } from './payments/payments.module';
 import { AssetsModule } from './assets/assets.module';
 import { CommentsModule } from './comments/comments.module';
 
@@ -33,6 +34,7 @@ import { CommentsModule } from './comments/comments.module';
     UsersModule,
     RolesModule,
     OrdersModule,
+    PaymentsModule,
     AssetsModule,
     CommentsModule,
   ],

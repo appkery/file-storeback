@@ -1,0 +1,22 @@
+type Payment {
+  id: Int
+}
+
+input CreatePaymentInput {
+  id: Int
+}
+
+input UpdatePaymentInput {
+  id: Int!
+}
+
+type Query {
+  payments: [Payment]!
+  payment(id: Int!): Payment
+}
+
+type Mutation {
+  createPayment(createPaymentInput: CreatePaymentInput!): Payment!
+  updatePayment(updatePaymentInput: UpdatePaymentInput!): Payment!
+  removePayment(id: Int!): Payment
+}
