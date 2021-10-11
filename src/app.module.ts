@@ -22,7 +22,7 @@ import { CommentsModule } from './comments/comments.module';
       port: 3306,
       username: 'admin',
       password: 'Qwer!234',
-      database: 'file_storeback',
+      database: 'file-storeback',
       autoLoadEntities: true,
       synchronize: true,
       keepConnectionAlive: true,
