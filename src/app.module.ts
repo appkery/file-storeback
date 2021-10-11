@@ -4,7 +4,6 @@ import GraphQLJSON from 'graphql-type-json';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
@@ -34,7 +33,6 @@ import { CommentsModule } from './comments/comments.module';
     }),
     AuthModule,
     UsersModule,
-    RolesModule,
     OrdersModule,
     ProductsModule,
     PaymentsModule,
