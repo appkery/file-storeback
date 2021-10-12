@@ -12,12 +12,6 @@ export enum UserOrder {
     CUSTOMER = "CUSTOMER"
 }
 
-export enum UserRole {
-    ADMIN = "ADMIN",
-    MEMBER = "MEMBER",
-    GUEST = "GUEST"
-}
-
 export class GetAuthInput {
     username: string;
     password: string;
@@ -32,13 +26,29 @@ export class UpdateOrderInput {
     order: UserOrder;
 }
 
+export class CreatePaymentInput {
+    id?: number;
+}
+
+export class UpdatePaymentInput {
+    id: number;
+}
+
+export class CreateProductInput {
+    id?: number;
+}
+
+export class UpdateProductInput {
+    id: number;
+}
+
 export class CreateRoleInput {
-    role: UserRole;
+    role: string;
 }
 
 export class UpdateRoleInput {
     id: number;
-    role: UserRole;
+    role: string;
 }
 
 export class GetUserInput {
@@ -59,6 +69,7 @@ export class UpdateUserInput {
     password?: string;
     full_name?: string;
     roles?: UpdateRoleInput[];
+    orders?: UpdateOrderInput[];
     is_active?: boolean;
 }
 
@@ -70,6 +81,18 @@ export abstract class IMutation {
     abstract updateOrder(updateOrderInput: UpdateOrderInput): UpdateResult | Promise<UpdateResult>;
 
     abstract removeOrder(id: number): DeleteResult | Promise<DeleteResult>;
+
+    abstract createPayment(createPaymentInput: CreatePaymentInput): Payment | Promise<Payment>;
+
+    abstract updatePayment(updatePaymentInput: UpdatePaymentInput): Payment | Promise<Payment>;
+
+    abstract removePayment(id: number): Payment | Promise<Payment>;
+
+    abstract createProduct(createProductInput: CreateProductInput): Product | Promise<Product>;
+
+    abstract updateProduct(updateProductInput: UpdateProductInput): Product | Promise<Product>;
+
+    abstract removeProduct(id: number): Product | Promise<Product>;
 
     abstract createRole(createRoleInput: CreateRoleInput): Role | Promise<Role>;
 
@@ -109,6 +132,14 @@ export abstract class IQuery {
 
     abstract order(id: number): Order | Promise<Order>;
 
+    abstract payments(): Payment[] | Promise<Payment[]>;
+
+    abstract payment(id: number): Payment | Promise<Payment>;
+
+    abstract products(): Product[] | Promise<Product[]>;
+
+    abstract product(id: number): Product | Promise<Product>;
+
     abstract roles(): Role[] | Promise<Role[]>;
 
     abstract role(id: number): Role | Promise<Role>;
@@ -118,9 +149,18 @@ export abstract class IQuery {
     abstract getUsers(): User[] | Promise<User[]>;
 }
 
+export class Payment {
+    id?: number;
+}
+
+export class Product {
+    id?: number;
+}
+
 export class Role {
     id: number;
-    role: UserRole;
+    role: string;
+    user?: User;
 }
 
 export class User {
@@ -129,6 +169,7 @@ export class User {
     password: string;
     full_name: string;
     roles?: Role[];
+    orders?: Order[];
     is_active?: boolean;
 }
 

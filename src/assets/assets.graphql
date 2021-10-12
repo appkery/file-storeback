@@ -1,0 +1,24 @@
+type Asset {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input CreateAssetInput {
+  # Example field (placeholder)
+  exampleField: Int
+}
+
+input UpdateAssetInput {
+  id: Int!
+}
+
+type Query {
+  assets: [Asset]!
+  asset(id: Int!): Asset
+}
+
+type Mutation {
+  createAsset(createAssetInput: CreateAssetInput!): Asset!
+  updateAsset(updateAssetInput: UpdateAssetInput!): Asset!
+  removeAsset(id: Int!): Asset
+}

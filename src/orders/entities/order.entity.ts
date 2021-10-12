@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { UserOrder } from 'src/graphql';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 export class Order {
@@ -11,5 +12,8 @@ export class Order {
     enum: UserOrder,
     default: UserOrder.CUSTOMER,
   })
-  order: UserOrder;
+  order: UserOrder;  
+
+  @ManyToOne((type) => User, (user) => user.orders)
+  user: User;
 }

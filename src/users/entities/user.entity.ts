@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Role } from 'src/roles/entities/role.entity';
+import { Order } from 'src/orders/entities/order.entity';
 
 @Entity()
 export class User {
@@ -15,8 +15,11 @@ export class User {
   @Column()
   full_name: string;
 
-  @OneToMany((type) => Role, (role) => role.user)
-  roles: Role[];
+  @Column()
+  roles: string;
+
+  @OneToMany((type) => Order, (order) => order.user)
+  orders: Order[];
 
   @Column({ default: true })
   is_active: boolean;
