@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import GraphQLJSON from 'graphql-type-json';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
+import { Connection, getConnectionOptions } from 'typeorm';
 import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
@@ -16,16 +16,12 @@ import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'admin',
-      password: 'Qwer!234',
-      database: 'file-storeback',
-      autoLoadEntities: true,
-      synchronize: true,
-      keepConnectionAlive: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: async () =>
+        Object.assign(await getConnectionOptions(), {
+          autoLoadEntities: true,
+          keepConnectionAlive: true,
+        }),
     }),
     GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
@@ -38,7 +34,7 @@ import { CommentsModule } from './comments/comments.module';
     PaymentsModule,
     PostsModule,
     ProductsModule,
-    UsersModule
+    UsersModule,
   ],
   controllers: [AppController],
   // providers: [AppService],
