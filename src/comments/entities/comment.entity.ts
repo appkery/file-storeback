@@ -8,13 +8,9 @@ export class Comment extends Crud {
   @Column()
   content: string;
 
-  @ManyToOne((type) => User, (user) => user.comments, {
-    cascade: true,
-  })
+  @ManyToOne((type) => User, (user) => user.comments)
   user: User;
 
-  @ManyToOne((type) => Post, (post) => post.comments, {
-    cascade: true,
-  })
+  @ManyToOne((type) => Post, (post) => post.comments)
   post: Post;
 }

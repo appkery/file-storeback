@@ -14,14 +14,10 @@ export class Order extends Crud {
   })
   order: UserOrder;
 
-  @ManyToOne((type) => User, (user) => user.orders, {
-    cascade: true,
-  })
+  @ManyToOne((type) => User, (user) => user.orders)
   user: User;
 
-  @ManyToOne((type) => Payment, (payment) => payment.orders, {
-    cascade: true,
-  })
+  @ManyToOne((type) => Payment, (payment) => payment.orders)
   payment: Payment;
 
   @ManyToMany((type) => Product, {
