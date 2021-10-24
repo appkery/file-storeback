@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCommentInput } from './dto/create-comment.input';
-import { UpdateCommentInput } from './dto/update-comment.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, DeleteResult } from 'typeorm';
+import { Comment, CreateCommentInput, UpdateCommentInput } from 'src/graphql';
 
 @Injectable()
 export class CommentsService {
-  create(createCommentInput: CreateCommentInput) {
-    return 'This action adds a new comment';
+  constructor(
+    @InjectRepository(Comment)
+    private commentsRepository: Repository<Comment>,
+  ) {}
+
+  async findAll(): Promise<Comment[]> {
+    return await this.commentsRepository.find();
   }
 
-  findAll() {
-    return `This action returns all comments`;
+  async findOne(id: number): Promise<Comment> {
+    return await this.commentsRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  async create(createCommentInput: CreateCommentInput): Promise<Comment> {
+    return await this.commentsRepository.save(createCommentInput);
   }
 
-  update(id: number, updateCommentInput: UpdateCommentInput) {
-    return `This action updates a #${id} comment`;
+  async update(updateCommentInput: UpdateCommentInput): Promise<unknown> {
+    return await this.commentsRepository.save(updateCommentInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  async delete(id: number): Promise<DeleteResult> {
+    return await this.commentsRepository.delete(id);
   }
 }

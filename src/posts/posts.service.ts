@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePostInput } from './dto/create-post.input';
-import { UpdatePostInput } from './dto/update-post.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreatePostInput, Post, UpdatePostInput } from 'src/graphql';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class PostsService {
-  create(createPostInput: CreatePostInput) {
-    return 'This action adds a new post';
+  constructor(
+    @InjectRepository(Post)
+    private postsRepository: Repository<Post>,
+  ) {}
+
+  async findAll(): Promise<Post[]> {
+    return await this.postsRepository.find();
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  async findOne(id: number): Promise<Post> {
+    return await this.postsRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async create(createPostInput: CreatePostInput): Promise<Post> {
+    return await this.postsRepository.save(createPostInput);
   }
 
-  update(id: number, updatePostInput: UpdatePostInput) {
-    return `This action updates a #${id} post`;
+  async update(updatePostInput: UpdatePostInput): Promise<unknown> {
+    return await this.postsRepository.save(updatePostInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async delete(id: number): Promise<DeleteResult> {
+    return await this.postsRepository.delete(id);
   }
 }

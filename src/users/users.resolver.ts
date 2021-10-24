@@ -9,16 +9,16 @@ import { GqlJwtGuard } from 'src/auth/guards/gql-jwt.guard';
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Query('getUser')
-  @UseGuards(GqlJwtGuard)
-  findOne(@CurrentUser() getUserInput: GetUserInput) {
-    return this.usersService.findUser(getUserInput.username);
-  }
-
   @Query('getUsers')
   @UseGuards(GqlJwtGuard)
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @Query('getUser')
+  @UseGuards(GqlJwtGuard)
+  findOne(@CurrentUser() getUserInput: GetUserInput) {
+    return this.usersService.findUser(getUserInput.username);
   }
 
   @Mutation('createUser')

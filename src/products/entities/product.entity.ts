@@ -1,15 +1,21 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Asset } from 'src/assets/entities/asset.entity';
+import { Crud } from 'src/crud.entity';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 
-export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+@Entity()
+export class Product extends Crud {
   @Column()
-  product_name: string;
+  name: string;
 
   @Column()
   price: number;
 
   @Column()
   quantity: number;
+
+  @ManyToMany((type) => Asset, {
+    cascade: true,
+  })
+  @JoinTable()
+  assets: Asset[];
 }

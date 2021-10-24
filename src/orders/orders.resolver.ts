@@ -7,19 +7,19 @@ import { UpdateOrderInput } from 'src/graphql';
 export class OrdersResolver {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @Mutation('createOrder')
-  create(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
-    return this.ordersService.create(createOrderInput);
-  }
-
-  @Query('orders')
+  @Query('getOrders')
   findAll() {
     return this.ordersService.findAll();
   }
 
-  @Query('order')
+  @Query('getOrder')
   findOne(@Args('id') id: number) {
     return this.ordersService.findOne(id);
+  }
+
+  @Mutation('createOrder')
+  create(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
+    return this.ordersService.create(createOrderInput);
   }
 
   @Mutation('updateOrder')
@@ -27,8 +27,8 @@ export class OrdersResolver {
     return this.ordersService.update(updateOrderInput.id, updateOrderInput);
   }
 
-  @Mutation('removeOrder')
-  remove(@Args('id') id: number) {
-    return this.ordersService.remove(id);
+  @Mutation('deleteOrder')
+  delete(@Args('id') id: number) {
+    return this.ordersService.delete(id);
   }
 }

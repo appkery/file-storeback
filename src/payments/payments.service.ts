@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePaymentInput } from 'src/graphql';
-import { UpdatePaymentInput } from 'src/graphql';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreatePaymentInput, Payment, UpdatePaymentInput } from 'src/graphql';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentsService {
-  create(createPaymentInput: CreatePaymentInput) {
-    return 'This action adds a new payment';
+  constructor(
+    @InjectRepository(Payment)
+    private paymentsRepository: Repository<Payment>,
+  ) {}
+
+  async findAll(): Promise<Payment[]> {
+    return await this.paymentsRepository.find();
   }
 
-  findAll() {
-    return `This action returns all payments`;
+  async findOne(id: number): Promise<Payment> {
+    return await this.paymentsRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} payment`;
+  async create(createPaymentInput: CreatePaymentInput): Promise<Payment> {
+    return await this.paymentsRepository.save(createPaymentInput);
   }
 
-  update(id: number, updatePaymentInput: UpdatePaymentInput) {
-    return `This action updates a #${id} payment`;
+  async update(updatePaymentInput: UpdatePaymentInput): Promise<unknown> {
+    return await this.paymentsRepository.save(updatePaymentInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} payment`;
+  async delete(id: number): Promise<DeleteResult> {
+    return await this.paymentsRepository.delete(id);
   }
 }

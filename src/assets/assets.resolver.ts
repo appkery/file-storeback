@@ -1,16 +1,10 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { CreateAssetInput, UpdateAssetInput } from 'src/graphql';
 import { AssetsService } from './assets.service';
-import { CreateAssetInput } from './dto/create-asset.input';
-import { UpdateAssetInput } from './dto/update-asset.input';
 
 @Resolver('Asset')
 export class AssetsResolver {
   constructor(private readonly assetsService: AssetsService) {}
-
-  @Mutation('createAsset')
-  create(@Args('createAssetInput') createAssetInput: CreateAssetInput) {
-    return this.assetsService.create(createAssetInput);
-  }
 
   @Query('assets')
   findAll() {
@@ -22,13 +16,18 @@ export class AssetsResolver {
     return this.assetsService.findOne(id);
   }
 
-  @Mutation('updateAsset')
-  update(@Args('updateAssetInput') updateAssetInput: UpdateAssetInput) {
-    return this.assetsService.update(updateAssetInput.id, updateAssetInput);
+  @Mutation('createAsset')
+  create(@Args('createAssetInput') createAssetInput: CreateAssetInput) {
+    return this.assetsService.create(createAssetInput);
   }
 
-  @Mutation('removeAsset')
-  remove(@Args('id') id: number) {
-    return this.assetsService.remove(id);
+  @Mutation('updateAsset')
+  update(@Args('updateAssetInput') updateAssetInput: UpdateAssetInput) {
+    return this.assetsService.update(updateAssetInput);
+  }
+
+  @Mutation('deleteAsset')
+  delete(@Args('id') id: number) {
+    return this.assetsService.delete(id);
   }
 }

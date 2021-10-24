@@ -1,22 +1,32 @@
 type Product {
   id: Int
+  name: String
+  price: Int
+  quantity: Int
+  assets: [Asset]
 }
 
 input CreateProductInput {
-  id: Int
+  name: String
+  price: Int
+  quantity: Int
 }
 
 input UpdateProductInput {
   id: Int!
+  name: String
+  price: Int
+  quantity: Int
+  assets: [UpdateAssetInput]
 }
 
 type Query {
-  products: [Product]!
-  product(id: Int!): Product
+  getProducts: [Product]!
+  getProduct(id: Int!): Product
 }
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
-  updateProduct(updateProductInput: UpdateProductInput!): Product!
-  removeProduct(id: Int!): Product
+  updateProduct(updateProductInput: UpdateProductInput!): UpdateResult!
+  deleteProduct(id: Int!): DeleteResult
 }

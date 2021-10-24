@@ -5,7 +5,8 @@ enum UserOrder {
 
 type Order {
   id: Int!
-  order: UserOrder!  
+  order: UserOrder!
+  products: [Product]
 }
 
 input CreateOrderInput {
@@ -15,15 +16,16 @@ input CreateOrderInput {
 input UpdateOrderInput {
   id: Int!
   order: UserOrder!
+  products: [UpdateProductInput]
 }
 
 type Query {
-  orders: [Order]!
-  order(id: Int!): Order
+  getOrders: [Order]!
+  getOrder(id: Int!): Order
 }
 
 type Mutation {
   createOrder(createOrderInput: CreateOrderInput!): Order!
   updateOrder(updateOrderInput: UpdateOrderInput!): UpdateResult!
-  removeOrder(id: Int!): DeleteResult!
+  deleteOrder(id: Int!): DeleteResult!
 }

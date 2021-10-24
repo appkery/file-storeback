@@ -1,22 +1,26 @@
 type Payment {
   id: Int
+  method: String
+  orders: [Order]
 }
 
 input CreatePaymentInput {
-  id: Int
+  method: String
 }
 
 input UpdatePaymentInput {
   id: Int!
+  method: String
+  orders: [UpdateOrderInput]
 }
 
 type Query {
-  payments: [Payment]!
-  payment(id: Int!): Payment
+  getPayments: [Payment]!
+  getPayment(id: Int!): Payment
 }
 
 type Mutation {
   createPayment(createPaymentInput: CreatePaymentInput!): Payment!
-  updatePayment(updatePaymentInput: UpdatePaymentInput!): Payment!
-  removePayment(id: Int!): Payment
+  updatePayment(updatePaymentInput: UpdatePaymentInput!): UpdateResult!
+  deletePayment(id: Int!): DeleteResult
 }

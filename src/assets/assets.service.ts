@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAssetInput } from './dto/create-asset.input';
-import { UpdateAssetInput } from './dto/update-asset.input';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Asset, CreateAssetInput, UpdateAssetInput } from 'src/graphql';
+import { Repository, DeleteResult } from 'typeorm';
 
 @Injectable()
 export class AssetsService {
-  create(createAssetInput: CreateAssetInput) {
-    return 'This action adds a new asset';
+  constructor(
+    @InjectRepository(Asset)
+    private assetsRepository: Repository<Asset>,
+  ) {}
+
+  async findAll(): Promise<Asset[]> {
+    return await this.assetsRepository.find();
   }
 
-  findAll() {
-    return `This action returns all assets`;
+  async findOne(id: number): Promise<Asset> {
+    return await this.assetsRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} asset`;
+  async create(createAssetInput: CreateAssetInput): Promise<Asset> {
+    return await this.assetsRepository.save(createAssetInput);
+  } 
+
+  async update(updateAssetInput: UpdateAssetInput): Promise<unknown> {
+    return await this.assetsRepository.save(updateAssetInput);
   }
 
-  update(id: number, updateAssetInput: UpdateAssetInput) {
-    return `This action updates a #${id} asset`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} asset`;
+  async delete(id: number): Promise<DeleteResult> {
+    return await this.assetsRepository.delete(id);
   }
 }

@@ -2,25 +2,22 @@ type User {
   id: Int!
   username: String!
   password: String!
-  full_name: String!
+  fullname: String!
   roles: String
-  orders: [Order]
   is_active: Boolean
+  posts: [Post]
+  comments: [Comment]
+  orders: [Order]
 }
 
 input GetUserInput {
   username: String!
 }
 
-type Query {
-  getUser(getUserInput: GetUserInput!): User
-  getUsers: [User]
-}
-
 input CreateUserInput {
   username: String!
   password: String!
-  full_name: String!
+  fullname: String!
   roles: String
   is_active: Boolean
 }
@@ -29,10 +26,17 @@ input UpdateUserInput {
   id: Int!
   username: String
   password: String
-  full_name: String
+  fullname: String
   roles: String
-  orders: [UpdateOrderInput]
   is_active: Boolean
+  posts: [UpdatePostInput]
+  comments: [UpdateCommentInput]
+  orders: [UpdateOrderInput]
+}
+
+type Query {
+  getUsers: [User]
+  getUser(getUserInput: GetUserInput!): User
 }
 
 type Mutation {

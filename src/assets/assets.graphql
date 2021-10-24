@@ -1,15 +1,15 @@
 type Asset {
-  # Example field (placeholder)
-  exampleField: Int
+  id: Int
+  filename: String
 }
 
 input CreateAssetInput {
-  # Example field (placeholder)
-  exampleField: Int
+  filename: String
 }
 
 input UpdateAssetInput {
   id: Int!
+  filename: String
 }
 
 type Query {
@@ -19,6 +19,6 @@ type Query {
 
 type Mutation {
   createAsset(createAssetInput: CreateAssetInput!): Asset!
-  updateAsset(updateAssetInput: UpdateAssetInput!): Asset!
-  removeAsset(id: Int!): Asset
+  updateAsset(updateAssetInput: UpdateAssetInput!): UpdateResult!
+  deleteAsset(id: Int!): DeleteResult
 }

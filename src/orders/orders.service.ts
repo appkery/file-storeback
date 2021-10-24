@@ -12,16 +12,16 @@ export class OrdersService {
     private ordersRepository: Repository<Order>,
   ) {}
 
-  async create(createOrderInput: CreateOrderInput): Promise<Order> {
-    return await this.ordersRepository.save(createOrderInput);
-  }
-
   async findAll(): Promise<Order[]> {
     return await this.ordersRepository.find();
   }
 
   async findOne(id: number): Promise<Order> {
     return await this.ordersRepository.findOne(id);
+  }
+
+  async create(createOrderInput: CreateOrderInput): Promise<Order> {
+    return await this.ordersRepository.save(createOrderInput);
   }
 
   async update(
@@ -31,7 +31,7 @@ export class OrdersService {
     return await this.ordersRepository.update(id, updateOrderInput);
   }
 
-  async remove(id: number): Promise<DeleteResult> {
+  async delete(id: number): Promise<DeleteResult> {
     return await this.ordersRepository.delete(id);
   }
 }

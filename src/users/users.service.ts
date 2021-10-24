@@ -12,16 +12,16 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
+  }
+
   async findOne(id: number): Promise<User> {
     return await this.usersRepository.findOne(id);
   }
 
   async findUser(username: string): Promise<User> {
     return await this.usersRepository.findOne({ username: username });
-  }
-
-  async findAll(): Promise<User[]> {
-    return await this.usersRepository.find();
   }
 
   async create(createUserInput: CreateUserInput): Promise<User> {

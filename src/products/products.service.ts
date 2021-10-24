@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProductInput } from 'src/graphql';
-import { UpdateProductInput } from 'src/graphql';
+import { InjectRepository } from '@nestjs/typeorm';
+import { CreateProductInput, Product, UpdateProductInput } from 'src/graphql';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ProductsService {
-  create(createProductInput: CreateProductInput) {
-    return 'This action adds a new product';
+  constructor(
+    @InjectRepository(Product)
+    private productsRepository: Repository<Product>,
+  ) {}
+
+  async findAll(): Promise<Product[]> {
+    return await this.productsRepository.find();
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findOne(id: number): Promise<Product> {
+    return await this.productsRepository.findOne(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async create(createProductInput: CreateProductInput): Promise<Product> {
+    return await this.productsRepository.save(createProductInput);
   }
 
-  update(id: number, updateProductInput: UpdateProductInput) {
-    return `This action updates a #${id} product`;
+  async update(updateProductInput: UpdateProductInput): Promise<unknown> {
+    return await this.productsRepository.save(updateProductInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async delete(id: number): Promise<DeleteResult> {
+    return await this.productsRepository.delete(id);
   }
 }
