@@ -1,21 +1,14 @@
-enum UserOrder {
-  ADMIN
-  CUSTOMER
-}
-
 type Order {
   id: Int!
-  order: UserOrder!
   products: [Product]
 }
 
 input CreateOrderInput {
-  order: UserOrder!
+  products: [UpdateProductInput]
 }
 
 input UpdateOrderInput {
   id: Int!
-  order: UserOrder!
   products: [UpdateProductInput]
 }
 

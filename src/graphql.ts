@@ -7,7 +7,7 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export enum UserOrder {
+export enum Role {
     ADMIN = "ADMIN",
     CUSTOMER = "CUSTOMER"
 }
@@ -36,12 +36,11 @@ export class UpdateCommentInput {
 }
 
 export class CreateOrderInput {
-    order: UserOrder;
+    products?: UpdateProductInput[];
 }
 
 export class UpdateOrderInput {
     id: number;
-    order: UserOrder;
     products?: UpdateProductInput[];
 }
 
@@ -87,7 +86,7 @@ export class CreateUserInput {
     username: string;
     password: string;
     fullname: string;
-    roles?: string;
+    roles?: Role;
     is_active?: boolean;
 }
 
@@ -96,7 +95,7 @@ export class UpdateUserInput {
     username?: string;
     password?: string;
     fullname?: string;
-    roles?: string;
+    roles?: Role;
     is_active?: boolean;
     posts?: UpdatePostInput[];
     comments?: UpdateCommentInput[];
@@ -206,7 +205,6 @@ export class LoginResult {
 
 export class Order {
     id: number;
-    order: UserOrder;
     products?: Product[];
 }
 
@@ -235,7 +233,7 @@ export class User {
     username: string;
     password: string;
     fullname: string;
-    roles?: string;
+    roles?: Role;
     is_active?: boolean;
     posts?: Post[];
     comments?: Comment[];

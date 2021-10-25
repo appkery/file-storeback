@@ -5,11 +5,11 @@ export abstract class Crud {
   id: number;
 
   @Column()
-  created_at: Date
+  created_at?: Date;
 
   @Column()
-  updated_at: Date
+  updated_at?: Date;
 
   @Column()
-  deleted_at: Date
+  deleted_at?: Date;
 }

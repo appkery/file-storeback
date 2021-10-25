@@ -3,6 +3,7 @@ import { Order } from 'src/orders/entities/order.entity';
 import { Crud } from 'src/crud.entity';
 import { Post } from 'src/posts/entities/post.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
+import { Role } from 'src/graphql';
 
 @Entity()
 export class User extends Crud {
@@ -15,8 +16,12 @@ export class User extends Crud {
   @Column()
   fullname: string;
 
-  @Column()
-  roles: string;
+  @Column({
+    type: 'enum',
+    enum: Role,
+    default: Role.CUSTOMER,
+  })
+  roles: Role;
 
   @Column({ default: true })
   is_active: boolean;

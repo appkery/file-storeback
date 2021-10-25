@@ -1,9 +1,14 @@
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
 type User {
   id: Int!
   username: String!
   password: String!
   fullname: String!
-  roles: String
+  roles: Role
   is_active: Boolean
   posts: [Post]
   comments: [Comment]
@@ -18,7 +23,7 @@ input CreateUserInput {
   username: String!
   password: String!
   fullname: String!
-  roles: String
+  roles: Role
   is_active: Boolean
 }
 
@@ -27,7 +32,7 @@ input UpdateUserInput {
   username: String
   password: String
   fullname: String
-  roles: String
+  roles: Role
   is_active: Boolean
   posts: [UpdatePostInput]
   comments: [UpdateCommentInput]
