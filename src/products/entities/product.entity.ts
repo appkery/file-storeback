@@ -10,9 +10,6 @@ export class Product extends Crud {
   @Column()
   price: number;
 
-  @Column()
-  quantity: number;
-
   @ManyToMany((type) => Asset, {
     cascade: true,
   })

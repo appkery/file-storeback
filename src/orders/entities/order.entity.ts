@@ -9,12 +9,13 @@ export class Order extends Crud {
   @ManyToOne((type) => User, (user) => user.orders)
   user: User;
 
-  @ManyToOne((type) => Payment, (payment) => payment.orders)
-  payment: Payment;
-
-  @ManyToMany((type) => Product, {
-    cascade: true,
-  })
+  @ManyToMany((type) => Product)
   @JoinTable()
   products: Product[];
+
+  @Column()
+  quantity?: number;
+
+  @ManyToOne((type) => Payment, (payment) => payment.orders)
+  payment: Payment;
 }

@@ -1,15 +1,18 @@
 type Order {
   id: Int!
   products: [Product]
+  quantity: Int
 }
 
 input CreateOrderInput {
   products: [UpdateProductInput]
+  quantity: Int
 }
 
 input UpdateOrderInput {
   id: Int!
   products: [UpdateProductInput]
+  quantity: Int
 }
 
 type Query {
