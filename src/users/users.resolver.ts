@@ -27,11 +27,13 @@ export class UsersResolver {
   }
 
   @Mutation('updateUser')
+  @UseGuards(GqlJwtGuard)
   update(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.usersService.update(updateUserInput);
   }
 
   @Mutation('deleteUser')
+  @UseGuards(GqlJwtGuard)
   delete(@Args('id') id: number) {
     return this.usersService.delete(id);
   }
