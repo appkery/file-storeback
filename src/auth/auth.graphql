@@ -1,8 +1,0 @@
-input GetAuthInput {
-  username: String!
-  password: String!
-}
-
-type Mutation {
-  login(getAuthInput: GetAuthInput): LoginResult
-}
